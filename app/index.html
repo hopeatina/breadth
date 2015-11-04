@@ -47,10 +47,10 @@
         </md-card>
     </md-content>
 
-      <md-tabs md-selected="selectedIndex" md-border-bottom="" md-autoselect="" md-stretch-tabs="always"
-                   md-dynamic-height >
+    <md-content class="md-padding">
+      <md-tabs md-selected="selectedIndex" md-autoselect="" md-stretch-tabs="always" md-center-tabs="true" md-dynamic-height md-border-bottom>
               <md-tab ng-repeat="it in ul.users" label="{{it.name}}" style="background-color: lightseagreen">
-                  <md-tab-body >
+
                       <div layout-align="center center" >
                           <md-card flex-offset="20" flex="60" >
                               <md-list>
@@ -64,18 +64,23 @@
                                   <md-list-item ng-repeat="book in it.books">
                                       <md-button ng-click="ul.selectUser(it)" layout-wrap
                                                  ng-class="{'selected' : it === ul.selected }">
+                                          <div layout="row" layout-wrap>
                                           <div flex ="30">
                                               <md-icon flex md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
                                           </div>
-                                          <div flex ="69">{{book}}</div>
+                                          <p flex ="69">{{book.title}} <br>{{book.description}}</p>
+                                          </div>
                                       </md-button>
                                   </md-list-item>
                               </md-list>
                           </md-card>
                       </div>
-                  </md-tab-body>
+
               </md-tab>
       </md-tabs>
+    </md-content>
+
+
   </div>
 
     <script src="./bower_components/angular/angular.js"></script>
@@ -109,6 +114,5 @@
               });
 
     </script>
-
   </body>
 </html>
