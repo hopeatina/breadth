@@ -27,14 +27,14 @@
 
   <div layout="column" role="main" >
 
-    <md-toolbar layout="row" class="md-whiteframe-z1">
+    <md-toolbar layout="row" class="md-whiteframe-z1" style="background-color: #000088">
       <md-button class="menu" ng-click="ul.toggleList()" aria-label="Show User List">
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
       <h1>Angular Material - Starter App</h1>
     </md-toolbar>
 
-    <md-content layout="row" l>
+    <md-content layout="row" style="background-color: lightseagreen">
         <md-card flex-offset="20" flex="60" layout-align="center center">
             <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
             <h2>{{ul.selected.name}}</h2>
@@ -47,38 +47,35 @@
         </md-card>
     </md-content>
 
-
-          <md-tabs md-selected="selectedIndex" md-border-bottom="" md-autoselect="" md-stretch-tabs="always"
-                   md-dynamic-height>
-              <md-tab ng-repeat="it in ul.users" label="{{it.name}}">
-                  <md-tab-body>
-                      <div layout-align="center center">
-                          <md-card flex-offset="20" flex="60">
+      <md-tabs md-selected="selectedIndex" md-border-bottom="" md-autoselect="" md-stretch-tabs="always"
+                   md-dynamic-height >
+              <md-tab ng-repeat="it in ul.users" label="{{it.name}}" style="background-color: lightseagreen">
+                  <md-tab-body >
+                      <div layout-align="center center" >
+                          <md-card flex-offset="20" flex="60" >
                               <md-list>
-                                  <md-list-item ng-repeat="it in ul.users">
-                                      <md-button ng-click="ul.selectUser(it)"
-                                                 ng-class="{'selected' : it === ul.selected }">
-                                          <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
-                                          {{it.name}}
-                                      </md-button>
-                                  </md-list-item>
+                                  <!--<md-list-item ng-repeat="it in ul.users">-->
+                                      <!--<md-button ng-click="ul.selectUser(it)"-->
+                                                 <!--ng-class="{'selected' : it === ul.selected }">-->
+                                          <!--<md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>-->
+                                          <!--{{it.name}}-->
+                                      <!--</md-button>-->
+                                  <!--</md-list-item>-->
                                   <md-list-item ng-repeat="book in it.books">
-                                      <md-button ng-click="ul.selectUser(it)"
+                                      <md-button ng-click="ul.selectUser(it)" layout-wrap
                                                  ng-class="{'selected' : it === ul.selected }">
-                                          <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
-                                          {{book}}
+                                          <div flex ="30">
+                                              <md-icon flex md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
+                                          </div>
+                                          <div flex ="69">{{book}}</div>
                                       </md-button>
                                   </md-list-item>
-
                               </md-list>
                           </md-card>
                       </div>
                   </md-tab-body>
               </md-tab>
-          </md-tabs>
-
-
-
+      </md-tabs>
   </div>
 
     <script src="./bower_components/angular/angular.js"></script>
