@@ -3,7 +3,7 @@
   angular
        .module('users')
        .controller('UserController', [
-          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q','$mdDialog','$scope','$http',
           UserController
        ]);
 
@@ -14,14 +14,103 @@
    * @param avatarsService
    * @constructor
    */
-  function UserController( userService, $mdSidenav, $mdBottomSheet, $log, $q) {
+
+
+    function UserController( userService, $mdSidenav, $mdBottomSheet, $log, $q,$mdDialog,$scope,$http) {
     var self = this;
 
     self.selected     = null;
     self.users        = [ ];
+    self.books        = [ ];
     self.selectUser   = selectUser;
     self.toggleList   = toggleUsersList;
     self.showContactOptions  = showContactOptions;
+    self.deletebook   = deletebook;
+
+  var strVar="";
+  strVar += "<md-dialog aria-label=\"book Form\">";
+  strVar += "    <md-content class=\"md-padding\">";
+  strVar += "";
+  strVar += "        <form name=\"bookForm\">";
+  strVar += "            <h1>Add a Book<\/h1>";
+  strVar += "            <div layout layout-sm=\"column\">";
+  strVar += "                <md-input-container flex><label>Book Title<\/label> <input ng-model=\"book.title\"";
+  strVar += "                                                                          placeholder=\"Title of Book\">";
+  strVar += "                <\/md-input-container>";
+  strVar += "            <\/div>";
+  strVar += "            <md-input-container flex><label>Author<\/label> <input ng-model=\"book.author\"><\/md-input-container>";
+  strVar += "            <div layout layout-sm=\"column\">";
+  strVar += "                <md-input-container flex><label>Number of pages<\/label> <input ng-model=\"book.pagenum\"><\/md-input-container>";
+  strVar += "                <md-input-container flex><label>Reading time (hours/num)<\/label> <input ng-model=\"book.readtime\"><\/md-input-container>";
+  strVar += "            <\/div>";
+  strVar += "            <md-input-container flex><label>Link<\/label> <textarea ng-model=\"book.link\" columns=\"1\"";
+  strVar += "                                                                       ><\/textarea>";
+  strVar += "            <\/md-input-container>";
+  strVar += "                <md-input-container flex><label>Brief Description <\/label> <textarea ng-model=\"book.brfdescrip\" columns=\"1\"><\/textarea>";
+  strVar += "";
+  strVar += "                <\/md-input-container>";
+  strVar += "                <md-input-container flex><label>Image Text <\/label> <textarea ng-model=\"book.image\"><\/textarea>";
+  strVar += "";
+  strVar += "                <\/md-input-container>";
+  strVar += "                <md-input-container flex><label>Phase number<\/label> <textarea ng-model=\"book.phase\" ><\/textarea>";
+  strVar += "";
+  strVar += "                <\/md-input-container>";
+  strVar += "        <\/form>";
+  strVar += "    <\/md-content>";
+  strVar += "    <md-dialog-actions layout=\"row\"><span flex><\/span>";
+  strVar += "        <md-button ng-click=\"cancel(\'not useful\')\"> Cancel<\/md-button>";
+  strVar += "        <md-button ng-click=\"answer(\'useful\')\" class=\"md-primary\"> Save<\/md-button>";
+  strVar += "    <\/md-dialog-actions>";
+  strVar += "<\/md-dialog>";
+
+      $scope.showAdd = function(ev) {
+          $mdDialog.show({
+              controller: DialogController,
+              template: strVar,
+              targetEvent: ev,
+          })
+              .then(function(answer) {
+                  $scope.alert = 'You said the information was "' + answer + '".';
+              }, function() {
+                  $scope.alert = 'You cancelled the dialog.';
+              });
+          console.log('Button clicked');
+      };
+
+
+      function deletebook(id) {
+          $http.delete('/api/books/'+id);
+          console.log('Deleted :  ' + id);
+      }
+
+      function DialogController($scope, $mdDialog,$http) {
+          $scope.hide = function() {
+              $mdDialog.hide();
+          };
+
+          $scope.cancel = function() {
+              $mdDialog.cancel();
+              refresh();
+          };
+
+          $scope.answer = function(answer) {
+              var bkinfo = {
+                  title: $scope.book.title,
+                  author: $scope.book.author,
+                  pages: $scope.book.pagenum,
+                  readtime: $scope.book.readtime,
+                  brfdescrip: $scope.book.brfdescrip,
+                  link: $scope.book.link,
+                  image: $scope.book.image,
+                  phase: $scope.book.phase
+              };
+              $http.post('/api/books', bkinfo);
+
+              refresh();
+
+              $mdDialog.hide(answer);
+          };
+      }
 
     // Load all registered users
 
@@ -32,6 +121,11 @@
             self.selected = users[0];
           });
 
+    function refresh() {
+        $http.get('/api/books').then(function(books) {
+            self.books = books.data;
+        });
+    }
     // *********************************
     // Internal methods
     // *********************************

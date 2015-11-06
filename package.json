@@ -21,5 +21,9 @@
     "postinstall": "bower update",
     "prestart": "npm update",
     "test": "protractor ./e2e/protractor.conf.js"
+  },
+  "dependencies": {
+    "angular-material-icons": "^0.6.0",
+    "lodash": "^3.10.1"
   }
 }
