@@ -3,7 +3,7 @@
   angular
        .module('users')
        .controller('UserController', [
-          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q','$mdDialog','$scope','$http',
+          'catService', '$mdSidenav', '$mdBottomSheet', '$log', '$q','$mdDialog','$scope','$http',
           UserController
        ]);
 
@@ -16,13 +16,14 @@
    */
 
 
-    function UserController( userService, $mdSidenav, $mdBottomSheet, $log, $q,$mdDialog,$scope,$http) {
+    function UserController( catService, $mdSidenav, $mdBottomSheet, $log, $q,$mdDialog,$scope,$http) {
     var self = this;
 
     self.selected     = null;
     self.users        = [ ];
     self.books        = [ ];
     self.selectUser   = selectUser;
+    self.selectBook   = selectBook;
     self.toggleList   = toggleUsersList;
     self.showContactOptions  = showContactOptions;
     self.deletebook   = deletebook;
@@ -78,9 +79,15 @@
       };
 
 
+      function selectBook(book) {
+          self.selected = book;
+
+      }
       function deletebook(id) {
-          $http.delete('/api/books/'+id);
-          console.log('Deleted :  ' + id);
+          $http.delete('/api/books/'+id).then(function () {
+              console.log('Deleted :  ' + id);
+              refresh();
+          });
       }
 
       function DialogController($scope, $mdDialog,$http) {
@@ -89,20 +96,21 @@
           };
 
           $scope.cancel = function() {
-              $mdDialog.cancel();
               refresh();
+              $mdDialog.cancel();
+
           };
 
           $scope.answer = function(answer) {
               var bkinfo = {
-                  title: $scope.book.title,
-                  author: $scope.book.author,
-                  pages: $scope.book.pagenum,
-                  readtime: $scope.book.readtime,
-                  brfdescrip: $scope.book.brfdescrip,
-                  link: $scope.book.link,
-                  image: $scope.book.image,
-                  phase: $scope.book.phase
+                  title: angular.isDefined($scope.book.title) ? $scope.book.title : "",
+                  author: angular.isDefined($scope.book.author) ? $scope.book.author : "",
+                  pages: angular.isDefined($scope.book.pagenum) ? $scope.book.pagenum : "",
+                  readtime: angular.isDefined($scope.book.readtime) ? $scope.book.readtime : "",
+                  brfdescrip: angular.isDefined($scope.book.brfdescrip) ? $scope.book.brfdescrip : "",
+                  link: angular.isDefined($scope.book.link) ? $scope.book.link : "",
+                  image: angular.isDefined($scope.book.image) ? $scope.book.image : "",
+                  phase: angular.isDefined($scope.book.phase) ? $scope.book.phase : ""
               };
               $http.post('/api/books', bkinfo);
 
@@ -114,11 +122,12 @@
 
     // Load all registered users
 
-    userService
+    catService
           .loadAllUsers()
           .then( function( users ) {
             self.users    = [].concat(users);
             self.selected = users[0];
+            refresh();
           });
 
     function refresh() {

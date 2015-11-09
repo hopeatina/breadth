@@ -19,13 +19,9 @@ exports.create = function(req, res) {
 /**
  * Find todo by id and store it in the request
  */
-exports.book = function(req, res, next, id) {
-    Book.findById(id, function(err, book) {
-        if (err) return next(err);
-        if (!book) return next(new Error('Failed to load book ' + id));
-        req.book = todo;
-        next();
-    });
+exports.book = function(req, next) {
+     next();
+
 };
 
 /**
@@ -59,11 +55,12 @@ exports.update = function(req, res) {
  * Delete a Book
  */
 exports.delete = function(req, res) {
-    var book = req.body;
+    var bookid = req.params.booksId;
+    console.log(bookid);
+    Book.remove({ _id: bookid}, function(err,book) {
+        if (err) {return res.status(500).json(err)}
+        else {res.json(book);}
 
-    Book.remove(function(err) {
-        if (err) return res.status(500).json(err);
-        res.json(book);
     });
 };
 

@@ -6,8 +6,10 @@ var morgan = require('morgan');             // log requests to the console (expr
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var routes = require('./routes');
-var servcont = require('./bookMethods')
 var books = require('./app/src/users/bookModel');
+var passport = require('passport');
+var expressSession = require('express-session');
+var cookieParser = require('cookie-parser');
 
 
 // configuration =================
@@ -37,13 +39,20 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+});
 
-
-app.route('/categories')
-    .get(function (request, response) {
-        response.json([{ name: 'Beverages' }, { name: 'Condiments' }]);
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
     });
+});
 
 require('./routes')(app);
 
