@@ -23,7 +23,8 @@ module.exports = function(app) {
 
     app.get('/', function (req, res) {
         //res.send("WE MADE IT HERE");
-        res.sendFile(__dirname + '/app/index.html', { message: req.flash('message') });
+        res.sendFile(__dirname + '/app/index.html');
+        console.log('problem starts here');
     });
 
     app.route('/categories')
