@@ -10,7 +10,8 @@ var books = require('./app/src/users/bookModel');
 var passport = require('passport');
 var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
-var port = process.env.PORT || 8080;
+
+var port = 8080;
 
 // configuration =================
 

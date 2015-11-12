@@ -109,10 +109,10 @@
         </md-card>
     </md-content>
 
-    <md-tabs md-tab-scroll md-selected="selectedIndex" class="md-accent"
-               md-dynamic-height md-swipe-content md-stretch-tabs="always" md-border-bottom>
+    <md-tabs md-selected="selectedIndex" class="md-accent"
+               md-dynamic-height md-swipe-content md-stretch-tabs="auto" md-center-tabs md-border-bottom>
               <md-tab ng-repeat="it in ul.users" label="{{it.name}}" >
-                      <div layout-align="center center" class="md-padding" style="background-color: khaki">
+                      <div class="md-padding" style="background-color: khaki">
                           <md-card flex-offset="20" flex="60" >
                               <!--<md-list>-->
                                   <!--<md-list-item ng-repeat="book in it.books">-->
@@ -130,19 +130,20 @@
                               <md-list>
                                   <md-list-item ng-repeat="book in ul.books | filter : {phase: it.phase}">
                                       <!--<md-button ng-click="ul.selectBook(book)" >-->
-                                          <div layout="row" flex layout-align="center center" >
-                                              <div layout="column" layout-align="center center">
+                                          <div layout="row">
+                                              <div flex="20" layout="column" layout-align="center center ">
                                                   <ng-md-icon  icon="arrow_drop_up"></ng-md-icon>
                                                   <ng-md-icon  icon="arrow_drop_down"></ng-md-icon>
                                               </div>
-                                              <div ng-click="ul.selectBook(book)">
+                                              <div flex ng-click="ul.selectBook(book)">
                                                   <md-icon md-svg-icon="share" class="avatar"></md-icon>
                                               </div>
-                                              <p ng-click="ul.selectBook(book)" flex="50">{{book.title}} By {{book.author}}</p>
+                                              <p flex="grow" ng-click="ul.selectBook(book)" flex="50">{{book.title}} By {{book.author}}</p>
+                                              <div flex="shrink" layout="column" layout-align="center center">
+                                                  <md-button class="md-warn md-raised" ng-click="ul.deletebook(book._id)">Delete</md-button>
+                                              </div>
                                           </div>
-                                      <div flex="10" layout="column" layout-align="center center">
-                                          <md-button flex class="md-warn md-raised" ng-click="ul.deletebook(book._id)">Delete</md-button>
-                                      </div>
+
                                       <!--</md-button>-->
                                   </md-list-item>
                               </md-list>
