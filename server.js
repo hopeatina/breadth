@@ -10,11 +10,14 @@ var books = require('./app/src/users/bookModel');
 var passport = require('passport');
 var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
-
+var port = process.env.PORT || 8080;
 
 // configuration =================
 
-mongoose.connect('mongodb://localhost/test');     // connect to mongoDB database on modulus.io
+//mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
+var uri = "mongodb://john:Street2@3@ds053764.mongolab.com:53764/heroku_34df02xl";
+mongoose.connect(uri);
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -119,6 +122,7 @@ require('./app/src/config/passport')(passport); // pass passport for configurati
 
 
 // listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
 exports = module.exports = app;
