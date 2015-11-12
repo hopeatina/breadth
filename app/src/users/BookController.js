@@ -120,7 +120,7 @@
           };
       }
 
-    // Load all registered users
+    // Load all registered books/users
 
     catService
           .loadAllUsers()

@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
-//app.use(expressSession({secret: 'mySecretKey'}));
+app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(passport.session());
@@ -115,6 +115,8 @@ app.use(passport.session());
 //};
 
 require('./routes')(app);
+require('./app/src/config/passport')(passport); // pass passport for configuration
+
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);

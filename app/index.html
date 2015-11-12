@@ -11,8 +11,8 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="assets/app.css"/>
-
     <style type="text/css">
+
         /**
          * Hide when Angular is not yet loaded and initialized
          */
@@ -83,15 +83,15 @@
 
   <div  layout="column" role="main">
 
-    <md-toolbar flex layout="row" class="md-whiteframe-z1" style="background-color: #000088">
+    <md-toolbar layout="row" class="md-whiteframe-z1" style="background-color: #000088">
       <md-button class="menu" ng-click="ul.toggleList()" aria-label="Show User List">
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
       <h1>Readerz</h1>
+        <div layout="column"><md-button flex="5" href="/auth/twitter" class="md-raised" layout="column"><ng-md-icon icon="twitter"></ng-md-icon> Login</md-button></div>
         <div class="main-fab">
         <md-button class="md-fab md-fab-top-right md-accent" aria-label="Add" ng-click="showAdd($event)" >
-            <ng-md-icon icon="add" size="32" style="fill: white"></ng-md-icon>
-
+            <md-icon md-svg-icon="add" ></md-icon>
         </md-button>
         </div>
     </md-toolbar>
@@ -109,8 +109,7 @@
         </md-card>
     </md-content>
 
-
-      <md-tabs md-tab-scroll md-selected="selectedIndex" class="md-accent"
+    <md-tabs md-tab-scroll md-selected="selectedIndex" class="md-accent"
                md-dynamic-height md-swipe-content md-stretch-tabs="always" md-border-bottom>
               <md-tab ng-repeat="it in ul.users" label="{{it.name}}" >
                       <div layout-align="center center" class="md-padding" style="background-color: khaki">
@@ -130,7 +129,6 @@
                               <!--</md-list>-->
                               <md-list>
                                   <md-list-item ng-repeat="book in ul.books | filter : {phase: it.phase}">
-
                                       <!--<md-button ng-click="ul.selectBook(book)" >-->
                                           <div layout="row" flex layout-align="center center" >
                                               <div layout="column" layout-align="center center">
@@ -148,13 +146,10 @@
                                       <!--</md-button>-->
                                   </md-list-item>
                               </md-list>
-
                           </md-card>
                       </div>
-
               </md-tab>
       </md-tabs>
-
 
   </div>
 
@@ -163,12 +158,10 @@
   <script src="./bower_components/angular-aria/angular-aria.js"></script>
   <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
 
-
   <script src="./src/users/Users.js"></script>
   <script src="src/users/BookController.js"></script>
   <script src="src/users/CategoriesService.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
-
   <script type="text/javascript">
 
           angular
@@ -182,7 +175,8 @@
                       .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
                       .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
                       .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
-                      .icon("phone"      , "./assets/svg/phone.svg"       , 512);
+                      .icon("phone"      , "./assets/svg/phone.svg"       , 512)
+                      .icon("add"      , "./assets/svg/ic_add_48px.svg"       , 512);
 
                       $mdThemingProvider.theme('default')
                           .primaryPalette('brown')
@@ -191,5 +185,6 @@
               });
 
     </script>
+
   </body>
 </html>
