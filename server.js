@@ -12,7 +12,7 @@ var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 
 app.set('port', process.env.PORT || 8080);
-var port = app.get('port')
+var port = app.get('port');
 // configuration =================
 
 //mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
