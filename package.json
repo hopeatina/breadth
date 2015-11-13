@@ -30,7 +30,7 @@
     "express-session": "^1.12.1",
     "lodash": "^3.10.1",
     "method-override": "*",
-    "mongoose": "^3.8.1",
+    "mongoose": "^4.1.9",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
     "passport-google-oauth": "~0.1.5",
