@@ -18,7 +18,7 @@ var port = app.get('port');
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
     replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 //mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
-//var uri = "mongodb://john:Street2@3@ds053764.mongolab.com:53764/heroku_34df02xl";
+
 var uri = "mongodb://heroku_34df02xl:bnpjamshf4oiht806bqn3p8don@ds053764.mongolab.com:53764/heroku_34df02xl";
 
 //var mongooseUri = uriUtil.formatMongoose(uri);
