@@ -10,6 +10,7 @@ var books = require('./app/src/users/bookModel');
 var passport = require('passport');
 var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
+var uriUtil = require('mongodb-uri');
 
 app.set('port', process.env.PORT || 8080);
 var port = app.get('port');
@@ -17,7 +18,9 @@ var port = app.get('port');
 
 //mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
 var uri = "mongodb://john:Street2@3@ds053764.mongolab.com:53764/heroku_34df02xl";
-mongoose.connect(uri);
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+
+mongoose.connect(mongooseUri, options);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
