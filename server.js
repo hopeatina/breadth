@@ -15,12 +15,15 @@ var uriUtil = require('mongodb-uri');
 app.set('port', process.env.PORT || 8080);
 var port = app.get('port');
 // configuration =================
-
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 //mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
-var uri = "mongodb://john:Street2@3@ds053764.mongolab.com:53764/heroku_34df02xl";
-var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+//var uri = "mongodb://john:Street2@3@ds053764.mongolab.com:53764/heroku_34df02xl";
+var uri = "mongodb://heroku_34df02xl:bnpjamshf4oiht806bqn3p8don@ds053764.mongolab.com:53764/heroku_34df02xl";
 
-mongoose.connect(mongooseUri, options);
+//var mongooseUri = uriUtil.formatMongoose(uri);
+
+mongoose.connect(uri, options);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
