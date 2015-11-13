@@ -5,7 +5,7 @@ var mongoose = require('mongoose');                     // mongoose for mongodb
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var routes = require('../routes');
+var routes = require('./Routes');
 var books = require('./app/src/users/bookModel');
 var passport = require('passport');
 var expressSession = require('express-session');
@@ -118,7 +118,7 @@ app.use(passport.session());
 //
 //};
 
-require('./routes')(app);
+require('./Routes')(app);
 require('./app/src/config/passport')(passport); // pass passport for configuration
 
 
