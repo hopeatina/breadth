@@ -100,6 +100,7 @@ md-button.menuBtn > md-icon {
 md-toolbar h1 {
   font-size: 1.250em;
   font-weight: 400;
+  background-color: #000088;
 }
 
 .avatar {

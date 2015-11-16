@@ -13,6 +13,7 @@ module.exports = function(app) {
     // Server API Routes
     //app.param('bookId', books.book);
     app.post('/api/books', books.create);
+    app.post('/api/books/:booksId', isLoggedIn,  books.upvote);
     app.get('/api/books', books.query);
     app.get('/api/books/:booksId', books.show);
     app.put('/api/books/:booksId', books.update);
@@ -32,24 +33,24 @@ module.exports = function(app) {
             response.json([{ name: 'Beverages' }, { name: 'Condiments' }]);
         });
 
-    /* Handle Login POST */
-    app.post('/login', passport.authenticate('login', {
-        successRedirect: '/',
-        failureRedirect: '/categories',
-        failureFlash : true
-    }));
+    ///* Handle Login POST */
+    //app.post('/login', passport.authenticate('login', {
+    //    successRedirect: '/',
+    //    failureRedirect: '/categories',
+    //    failureFlash : true
+    //}));
 
-    /* GET Registration Page */
-    app.get('/signup', function(req, res){
-        res.render('register',{message: req.flash('message')});
-    });
+    ///* GET Registration Page */
+    //app.get('/signup', function(req, res){
+    //    res.render('register',{message: req.flash('message')});
+    //});
 
-    /* Handle Registration POST */
-    app.post('/signup', passport.authenticate('signup', {
-        successRedirect: '/',
-        failureRedirect: '/signup',
-        failureFlash : true
-    }));
+    ///* Handle Registration POST */
+    //app.post('/signup', passport.authenticate('signup', {
+    //    successRedirect: '/',
+    //    failureRedirect: '/signup',
+    //    failureFlash : true
+    //}));
 
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
@@ -79,7 +80,6 @@ module.exports = function(app) {
         }));
 
 };
-
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 

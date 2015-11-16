@@ -27,6 +27,9 @@
     self.toggleList   = toggleUsersList;
     self.showContactOptions  = showContactOptions;
     self.deletebook   = deletebook;
+    self.streams      = streams();
+    self.showAdd      = showAdd;
+    self.upvote       = upvote;
 
   var strVar="";
   strVar += "<md-dialog aria-label=\"book Form\">";
@@ -64,7 +67,14 @@
   strVar += "    <\/md-dialog-actions>";
   strVar += "<\/md-dialog>";
 
-      $scope.showAdd = function(ev) {
+      function upvote(id) {
+          $http.post('/api/books/'+id).then(function () {
+              console.log('Upvoted :  ' + id);
+              refresh();
+          });
+      }
+
+      function showAdd (ev) {
           $mdDialog.show({
               controller: DialogController,
               template: strVar,
@@ -76,8 +86,21 @@
                   $scope.alert = 'You cancelled the dialog.';
               });
           console.log('Button clicked');
-      };
+      }
 
+      function  streams() {
+
+        var streams =[{title: "Home", href:"/views/home"},
+        {title: "Streams", href:"/views/streams"},
+        //{title: "Startups"},
+        //{title:"Leadership"},
+        //{title:"Healthcare"},
+        //{title:"Energy"},
+        //{title:"Parenting"},
+        {title:"Contact", href:"/views/home"}];
+        return streams;
+
+      }
 
       function selectBook(book) {
           self.selected = book;

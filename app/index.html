@@ -83,18 +83,34 @@
 
   <div  layout="column" role="main">
 
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+          <md-toolbar class="md-theme-light">
+              <h1 class="md-toolbar-tools">Breadth</h1>
+          </md-toolbar>
+          <md-content layout-padding>
+              <md-list>
+                  <md-list-item ng-repeat="stream in ul.streams">
+                   <md-button><h1>{{stream.title}}</h1></md-button>
+                  </md-list-item>
+              </md-list>
+              <md-button ng-click="ul.toggleList()" class="md-primary">
+                  <ng-md-icon icon="clear" size="32"></ng-md-icon>
+              </md-button>
+          </md-content>
+      </md-sidenav>
+      <div layout="column" class="relative" layout-fill role="main">
+          <md-button class="md-fab md-fab-bottom-right md-accent md-button" aria-label="Add" ng-click="showAdd($event)" >
+              <ng-md-icon icon="add" ></ng-md-icon>
+          </md-button>
     <md-toolbar layout="row" class="md-whiteframe-z1" style="background-color: #000088">
       <md-button class="menu" ng-click="ul.toggleList()" aria-label="Show User List">
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
-      <h1>Readerz</h1>
-        <div layout="column"><md-button flex="5" href="/auth/twitter" class="md-raised" layout="column"><ng-md-icon icon="twitter"></ng-md-icon> Login</md-button></div>
-        <div class="main-fab">
-        <md-button class="md-fab md-fab-top-right md-accent" aria-label="Add" ng-click="showAdd($event)" >
-            <md-icon md-svg-icon="add" ></md-icon>
-        </md-button>
-        </div>
+      <h1>Breadth</h1>
+       <div flex="15" layout="row" layout-align="center center" > Login with <a href="/auth/twitter" >  <ng-md-icon icon="twitter" style="fill: white" size="32"></ng-md-icon> </a></div>
     </md-toolbar>
+          </div>
+
 
     <md-content layout="row" style="background-color: lightseagreen" class="md-padding">
         <md-card flex-offset="20" flex="60" layout-align="center center" layout-wrap>
@@ -132,8 +148,8 @@
                                       <!--<md-button ng-click="ul.selectBook(book)" >-->
                                           <div flex layout="row">
                                               <div  flex="10" layout="column" layout-align="center center ">
-                                                  <ng-md-icon  icon="arrow_drop_up"></ng-md-icon>
-                                                  <ng-md-icon  icon="arrow_drop_down"></ng-md-icon>
+                                                  <a ng-click="ul.upvote(book._id)"><ng-md-icon icon="arrow_drop_up"></ng-md-icon></a>
+                                                  <a ng-click="ul.upvote(book._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
                                               </div>
                                               <div  ng-click="ul.selectBook(book)">
                                                   <md-icon md-svg-icon="share" class="avatar"></md-icon>
@@ -158,6 +174,7 @@
   <script src="./bower_components/angular-animate/angular-animate.js"></script>
   <script src="./bower_components/angular-aria/angular-aria.js"></script>
   <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+  <script src="./bower_components/angular-route/angular-route.js"></script>
 
   <script src="./src/users/Users.js"></script>
   <script src="src/users/BookController.js"></script>
@@ -166,7 +183,7 @@
   <script type="text/javascript">
 
           angular
-              .module('starterApp', ['ngMaterial', 'users','ngMdIcons'])
+              .module('starterApp', ['ngMaterial', 'users','ngMdIcons','ngRoute'])
               .config(function($mdThemingProvider, $mdIconProvider){
 
                   $mdIconProvider
@@ -177,13 +194,29 @@
                       .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
                       .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
                       .icon("phone"      , "./assets/svg/phone.svg"       , 512)
-                      .icon("add"      , "./assets/svg/ic_add_48px.svg"       , 512);
+                      .icon("add"      , "./assets/svg/ic_add_48px.svg"       , 24);
 
                       $mdThemingProvider.theme('default')
                           .primaryPalette('brown')
                           .accentPalette('red');
 
-              });
+              })
+              .config(function($routeProvider) {
+                      $routeProvider.
+
+                              when('/addStudent', {
+                                  templateUrl: 'addStudent.html', controller: 'AddStudentController'
+                              }).
+
+                              when('/viewStudents', {
+                                  templateUrl: 'viewStudents.html', controller: 'ViewStudentsController'
+                              }).
+
+                              otherwise({
+                                  redirectTo: '/addStudent'
+                              });
+
+                  });
 
     </script>
 

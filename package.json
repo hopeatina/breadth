@@ -24,23 +24,24 @@
   "dependencies": {
     "angular-material-icons": "^0.6.0",
     "bcrypt-nodejs": "0.0.3",
+    "body-parser": "*",
+    "bower": "^1.3.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.0",
+    "express": "^4.2",
     "express-session": "^1.12.1",
     "lodash": "^3.10.1",
     "method-override": "*",
+    "mongodb-uri": "*",
     "mongoose": "^4.1.9",
+    "mongoose-voting": "^0.2.0",
+    "morgan": "*",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
     "passport-google-oauth": "~0.1.5",
     "passport-local": "~0.1.6",
     "passport-twitter": "~1.0.2",
-    "bower": "^1.3.2",
-    "express": "^4.2",
-    "morgan": "*",
-    "body-parser": "*",
-    "mongodb-uri": "*"
-
+    "node-path": "0.0.3"
   },
   "engines": {
     "node": "4.1.1"

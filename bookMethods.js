@@ -70,3 +70,21 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 
 };
+
+/**
+ * Upvote a Book
+ */
+exports.upvote = function(req, res) {
+    var id = req.params.booksId;
+    console.log(id);
+    Book.findById(id, function(err,book) {
+        console.log(book);
+        book.vote(req.user, 'positive', function(err,book) {
+                if (err) { console.log('Found error %s', err)}
+                else {res.json(book);}
+
+                console.log('Delivering upvote to book%s', book);
+            });
+    });
+
+};
