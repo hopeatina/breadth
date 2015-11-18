@@ -93,7 +93,7 @@
                    <md-button><h1>{{stream.title}}</h1></md-button>
                   </md-list-item>
               </md-list>
-              <md-button ng-click="ul.toggleList()" class="md-primary">
+              <md-button ng-click="ul.toggleList()" class="md-primary" aria-label="Clear Sidebar">
                   <ng-md-icon icon="clear" size="32"></ng-md-icon>
               </md-button>
           </md-content>
@@ -149,12 +149,13 @@
                                           <div flex layout="row">
                                               <div  flex="10" layout="column" layout-align="center center ">
                                                   <a ng-click="ul.upvote(book._id)"><ng-md-icon icon="arrow_drop_up"></ng-md-icon></a>
-                                                  <a ng-click="ul.upvote(book._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
+                                                  {{book.score}}
+                                                  <a ng-click="ul.downvote(book._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
                                               </div>
                                               <div  ng-click="ul.selectBook(book)">
                                                   <md-icon md-svg-icon="share" class="avatar"></md-icon>
                                               </div>
-                                              <p  flex="grow" ng-click="ul.selectBook(book)" flex="50">{{book.title}} By {{book.author}}</p>
+                                              <p  flex="grow" ng-click="ul.selectBook(book)" flex="50">{{book.title}} By {{book.author}}, {{book._id}}</p>
                                               <div flex="10" layout="column" layout-align="center center">
                                                   <md-button class="md-warn md-raised" ng-click="ul.deletebook(book._id)">Delete</md-button>
                                               </div>

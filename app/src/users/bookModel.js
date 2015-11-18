@@ -7,15 +7,9 @@ var mongoose = require('mongoose'),
     voting = require('mongoose-voting'),
     Schema = mongoose.Schema,
     User = require('./userModel');
-
+    //var Vote = require('./voteModel').schema;
 
     var ObjectId = mongoose.Schema.Types.ObjectId;
-
-    //var Vote = mongoose.Schema({
-    //    author: { type: ObjectId, ref: 'Citizen', required: true }
-    //    , value: { type: String, enum: [ "positive", "negative" ], required: true }
-    //    , createdAt: { type: Date, default: Date.now }
-    //});
 
     var bookSchema = mongoose.Schema({
         title: String,
@@ -29,13 +23,23 @@ var mongoose = require('mongoose'),
         id: ObjectId,
         suggested: Number,
         readby: String,
-        year: Number
-        //votes: [ Vote ]
-
+        year: Number,
+        score: { type: Number, default: 0 }
+    }, {
+        toObject: {
+            virtuals: true
+        },
+        toJSON: {
+            virtuals: true
+        }
     });
 
-    //bookSchema.index({ createdAt: -1 });
-    //bookSchema.index({ score: -1 });
+    bookSchema.index({ createdAt: -1 });
+    bookSchema.index({ score: -1 });
+
+    bookSchema.set('toObject', { getters: true});
+    bookSchema.set('toJSON', { getters: true});
+
     //
     //bookSchema.post('save', function(comment) {
     //var Element = this.context.charAt(0).toUpperCase() + this.context.slice(1);
@@ -71,28 +75,30 @@ var mongoose = require('mongoose'),
         console.log(greeting);
     };
 
-    ///**
-    // * Get `positive` votes
-    // *
-    // * @return {Array} voters
-    // * @api public
-    // */
-    //
-    //bookSchema.virtual('upvotes').get(function() {
-    //    return this.votes.filter(function(v) {
+    /**
+     * Get `positive` votes
+     *
+     * @return {Array} voters
+     * @api public
+     */
+
+    //bookSchema.virtual('vote.upvotes').get(function() {
+    //    console.log("virtual positive: " + this.vote);
+    //    return this.vote.filter(function(v) {
     //        return "positive" === v.value;
     //    });
     //});
-    //
-    ///**
-    // * Get `negative` votes
-    // *
-    // * @return {Array} voters
-    // * @api public
-    // */
-    //
-    //bookSchema.virtual('downvotes').get(function() {
-    //    return this.votes.filter(function(v) {
+
+    /**
+     * Get `negative` votes
+     *
+     * @return {Array} voters
+     * @api public
+     */
+
+    //bookSchema.virtual('vote.downvotes').get(function() {
+    //    console.log("virtual negative: " + this.vote);
+    //    return this.vote.filter(function(v) {
     //        return "negative" === v.value;
     //    });
     //});
@@ -109,14 +115,26 @@ var mongoose = require('mongoose'),
      */
 
 
-    //bookSchema.methods.vote = function(citizen, value, cb) {
-    //    var vote = { author: citizen, value: value };
-    //    this.unvote(citizen);
-    //    this.votes.push(vote);
-    //    this.score = this.upvotes.length - this.downvotes.length;
-    //    console.log(this.score);
-    //    this.save(cb);
-    //};
+    bookSchema.methods.letsvote = function(citizen, type, cb) {
+
+        if (this.upvoted(citizen)) {
+            this.unvote(citizen);
+        }
+        else {
+            //console.log(this.upvoted(citizen) + " BEFORE: " + this);
+            if (type == 'upvote') {
+            this.upvote(citizen);}
+            else if (type == 'downvote') {
+                this.downvote(citizen);
+            } else { console.log('I AIN\'T GOT NOT TYPE');}
+            //console.log("AFTER: " + this);
+            console.log("Score before: " + this.score + ", downvotes: "+ this.downvotes() + ", upvotes: "+  this.upvotes());
+            this.score = this.upvotes() - this.downvotes();
+            console.log("After score " + this.score);
+        }
+
+        this.save(cb(this));
+    };
 
     /**
      * Unvote Comment from provided citizen
@@ -126,26 +144,29 @@ var mongoose = require('mongoose'),
      * @api public
      */
 
-    //bookSchema.methods.unvote = function(citizen, cb) {
-    //    var votes = this.votes;
-    //    var c = citizen.get ? citizen.get('_id') : citizen;
-    //
-    //    var voted = votes.filter(function(v) {
-    //        var a = v.author.get ? v.author.get('_id') : v.author;
-    //        return a.equals
-    //            ? a.equals(c)
-    //            : a === c;
-    //    });
-    //
-    //    log('About to remove votes %j', voted);
-    //    voted.length && voted.forEach(function(v) {
-    //        var removed = votes.id(v.id).remove();
-    //        log('Remove vote %j', removed);
-    //    });
-    //
-    //    if (cb) this.save(cb);
-    //};
+    bookSchema.methods.unvoter = function(citizen, cb) {
+        var votes = this.vote;
+        //console.log("votes:" + votes);
+        var c = citizen.get ? citizen.get('_id') : citizen;
+
+        var voted = votes.filter(function(v) {
+            var a = v.author.get ? v.author.get('_id') : v.author;
+            return a.equals
+                ? a.equals(c)
+                : a === c;
+        });
+
+        //console.log('About to remove votes %j', voted);
+        voted.length && voted.forEach(function(v) {
+            var removed = votes.id(v.id).remove();
+            console.log('Remove vote %j', removed);
+        });
+
+        if (cb) this.save(cb);
+    };
 
     bookSchema.plugin(voting,{ ref: 'User' });
+
+    //console.log(bookSchema);
 
 module.exports = mongoose.model('Book', bookSchema);

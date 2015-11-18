@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Book = require('./app/src/users/bookModel');
-
+var User = require('./app/src/users/userModel');
 /**
  * Create a Book
  */
@@ -76,15 +76,48 @@ exports.list = function(req, res) {
  */
 exports.upvote = function(req, res) {
     var id = req.params.booksId;
-    console.log(id);
-    Book.findById(id, function(err,book) {
-        console.log(book);
-        book.vote(req.user, 'positive', function(err,book) {
-                if (err) { console.log('Found error %s', err)}
-                else {res.json(book);}
+    //console.log("booksId: = " + id);
 
-                console.log('Delivering upvote to book%s', book);
+    Book.findOne({ _id: id}, function(err,booker) {
+        //console.log(booker.title);
+        var book = new Book(booker);
+        var user = new User(req.user);
+       // console.log('USER: '+ user + "  BOOK: " + book ); // " BOOKER: " + booker
+        book.letsvote(user, 'upvote', function(doc) {
+               // /if (err) {console.log('Found error %s', err) } //
+               // console.log('Delivered upvote to book : %s', doc);
+                Book.findOneAndUpdate(
+                    { _id: id},
+                    doc,
+                    function(err, results) {
+                        //console.log(results + err);
+                    });
+                //console.log(result());
             });
+    });
+
+};
+
+exports.downvote = function(req, res) {
+    var id = req.params.booksId;
+    console.log("booksId: = " + id);
+
+    Book.findOne({ _id: id}, function(err,booker) {
+        console.log(booker.title);
+        var book = new Book(booker);
+        var user = new User(req.user);
+        console.log('USER: '+ user + "  BOOK: " + book ); // " BOOKER: " + booker
+        book.letsvote(user, 'downvote', function(doc) {
+            // /if (err) {console.log('Found error %s', err) } //
+            console.log('Delivered downvote to book : %s', doc);
+            Book.findOneAndUpdate(
+                { _id: id},
+                doc,
+                function(err, results) {
+                    //console.log(results + err);
+                });
+        });
+
     });
 
 };

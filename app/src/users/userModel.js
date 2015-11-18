@@ -4,6 +4,8 @@
 
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var Vote = require('./voteModel').schema;
+
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -29,7 +31,8 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
-    }
+    },
+    vote: [ Vote ]
 
 });
 

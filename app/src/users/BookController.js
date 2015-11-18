@@ -30,6 +30,8 @@
     self.streams      = streams();
     self.showAdd      = showAdd;
     self.upvote       = upvote;
+    self.downvote     = downvote;
+
 
   var strVar="";
   strVar += "<md-dialog aria-label=\"book Form\">";
@@ -68,10 +70,13 @@
   strVar += "<\/md-dialog>";
 
       function upvote(id) {
-          $http.post('/api/books/'+id).then(function () {
-              console.log('Upvoted :  ' + id);
-              refresh();
-          });
+          console.log('Upvoted :  ' + id);
+          $http.post('/api/books/upvote'+id).then(refresh());
+      }
+
+      function downvote(id) {
+          console.log('Downvoted :  ' + id);
+          $http.post('/api/books/downvote'+id).then(refresh());
       }
 
       function showAdd (ev) {

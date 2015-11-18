@@ -13,7 +13,8 @@ module.exports = function(app) {
     // Server API Routes
     //app.param('bookId', books.book);
     app.post('/api/books', books.create);
-    app.post('/api/books/:booksId', isLoggedIn,  books.upvote);
+    app.post('/api/books/upvote:booksId', isLoggedIn,  books.upvote);
+    app.post('/api/books/downvote:booksId', isLoggedIn,  books.downvote);
     app.get('/api/books', books.query);
     app.get('/api/books/:booksId', books.show);
     app.put('/api/books/:booksId', books.update);
@@ -89,4 +90,5 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+    console.log("Bruh you're not logged in!");
 }
