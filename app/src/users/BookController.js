@@ -70,13 +70,19 @@
   strVar += "<\/md-dialog>";
 
       function upvote(id) {
-          console.log('Upvoted :  ' + id);
-          $http.post('/api/books/upvote'+id).then(refresh());
+         // console.log('Upvoted :  ' + id);
+          $http.post('/api/books/upvote'+id).then(function (res) {
+              console.log('Upvoted :  ' + id + res);
+              refresh();
+          });
       }
 
       function downvote(id) {
-          console.log('Downvoted :  ' + id);
-          $http.post('/api/books/downvote'+id).then(refresh());
+          //console.log('Downvoted :  ' + id);
+          $http.post('/api/books/downvote'+id).then(function (res) {
+              console.log('Downvoted :  ' + id + " " + res.data);
+              refresh();
+          });
       }
 
       function showAdd (ev) {

@@ -117,23 +117,23 @@ var mongoose = require('mongoose'),
 
     bookSchema.methods.letsvote = function(citizen, type, cb) {
 
-        if (this.upvoted(citizen)) {
+        if (false) {
             this.unvote(citizen);
         }
         else {
             //console.log(this.upvoted(citizen) + " BEFORE: " + this);
-            if (type == 'upvote') {
+            if (type == 'upvote' && !this.upvoted(citizen)) {
             this.upvote(citizen);}
-            else if (type == 'downvote') {
+            else if (type == 'downvote' && !this.downvoted(citizen)) {
                 this.downvote(citizen);
-            } else { console.log('I AIN\'T GOT NOT TYPE');}
+            } else { console.log('I AIN\'T GOT NOT TYPE or you already downvoted');}
             //console.log("AFTER: " + this);
-            console.log("Score before: " + this.score + ", downvotes: "+ this.downvotes() + ", upvotes: "+  this.upvotes());
+            //console.log("Score before: " + this.score + ", downvotes: "+ this.downvotes() + ", upvotes: "+  this.upvotes());
             this.score = this.upvotes() - this.downvotes();
-            console.log("After score " + this.score);
+            //console.log("After score " + this.score);
         }
 
-        this.save(cb(this));
+        cb(this);
     };
 
     /**

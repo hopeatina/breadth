@@ -86,6 +86,7 @@ exports.upvote = function(req, res) {
         book.letsvote(user, 'upvote', function(doc) {
                // /if (err) {console.log('Found error %s', err) } //
                // console.log('Delivered upvote to book : %s', doc);
+            res.json(doc)
                 Book.findOneAndUpdate(
                     { _id: id},
                     doc,
@@ -100,21 +101,24 @@ exports.upvote = function(req, res) {
 
 exports.downvote = function(req, res) {
     var id = req.params.booksId;
-    console.log("booksId: = " + id);
+    //console.log("booksId: = " + id);
 
     Book.findOne({ _id: id}, function(err,booker) {
         console.log(booker.title);
         var book = new Book(booker);
         var user = new User(req.user);
-        console.log('USER: '+ user + "  BOOK: " + book ); // " BOOKER: " + booker
+        //console.log('USER: '+ user + "  BOOK: " + book ); // " BOOKER: " + booker
         book.letsvote(user, 'downvote', function(doc) {
             // /if (err) {console.log('Found error %s', err) } //
             console.log('Delivered downvote to book : %s', doc);
+            if (doc) {res.json(doc);}
+            else {return res.status(500);}
+
             Book.findOneAndUpdate(
                 { _id: id},
                 doc,
                 function(err, results) {
-                    //console.log(results + err);
+                    console.log(results + err);
                 });
         });
 
