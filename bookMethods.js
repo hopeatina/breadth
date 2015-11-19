@@ -85,8 +85,9 @@ exports.upvote = function(req, res) {
        // console.log('USER: '+ user + "  BOOK: " + book ); // " BOOKER: " + booker
         book.letsvote(user, 'upvote', function(doc) {
                // /if (err) {console.log('Found error %s', err) } //
-               // console.log('Delivered upvote to book : %s', doc);
-            res.json(doc)
+                console.log('Delivered upvote to book : %s', doc);
+            if (doc) {res.json(doc);}
+            else {return res.status(500);}
                 Book.findOneAndUpdate(
                     { _id: id},
                     doc,
