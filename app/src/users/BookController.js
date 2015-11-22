@@ -3,7 +3,7 @@
   angular
        .module('users')
        .controller('UserController', [
-          'catService', '$mdSidenav', '$mdBottomSheet', '$log', '$q','$mdDialog','$scope','$http',
+          'catService', '$mdSidenav', '$mdBottomSheet', '$log', '$q','$mdDialog','$scope','$http','$window',
           UserController
        ]);
 
@@ -16,7 +16,7 @@
    */
 
 
-    function UserController( catService, $mdSidenav, $mdBottomSheet, $log, $q,$mdDialog,$scope,$http) {
+    function UserController( catService, $mdSidenav, $mdBottomSheet, $log, $q,$mdDialog,$scope,$http,$window) {
     var self = this;
 
     self.selected     = null;
@@ -68,6 +68,11 @@
   strVar += "        <md-button ng-click=\"answer(\'useful\')\" class=\"md-primary\"> Save<\/md-button>";
   strVar += "    <\/md-dialog-actions>";
   strVar += "<\/md-dialog>";
+
+      $scope.redirectToAmazon = function redirectToAmazon(link) {
+          $window.open(link, '_blank');
+          console.log(link);
+      };
 
       function upvote(id) {
          // console.log('Upvoted :  ' + id);
@@ -139,7 +144,7 @@
               var bkinfo = {
                   title: angular.isDefined($scope.book.title) ? $scope.book.title : "",
                   author: angular.isDefined($scope.book.author) ? $scope.book.author : "",
-                  pages: angular.isDefined($scope.book.pagenum) ? $scope.book.pagenum : "",
+                  pages: angular.isDefined($scope.book.pagenum) ? $scope.book.pages: "",
                   readtime: angular.isDefined($scope.book.readtime) ? $scope.book.readtime : "",
                   brfdescrip: angular.isDefined($scope.book.brfdescrip) ? $scope.book.brfdescrip : "",
                   link: angular.isDefined($scope.book.link) ? $scope.book.link : "",
