@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <title>Readerz, daBest</title>
+    <title>Breadth</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,6 +92,7 @@
             height: auto;
             box-shadow: 0px 0px 10px #888888;
             transform-origin: 0 50%;
+            /*transform: rotateY(0);*/
             transition: all 0.45s ease
         }
 
@@ -114,7 +115,7 @@
 
         img.famousPerson
         {
-            width: 75px;
+            width: auto;
             height: 75px;
             border-radius: 50%;
         }
@@ -132,7 +133,9 @@
   <div  layout="column" role="main">
       <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
           <md-toolbar class="md-theme-light">
-              <h1 class="md-toolbar-tools">Breadth</h1>
+              <div class="md-toolbar-tools">
+                  <h2><span>Breadth</span></h2>
+              </div>
           </md-toolbar>
           <md-content layout-padding>
               <md-list>
@@ -161,13 +164,13 @@
     <md-content style="background-color: lightseagreen" class="md-padding">
         <md-card id="topcard" flex-offset="20" flex="60"  >
             <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
-            <div layout="row">
-                <div ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" >
+            <div layout="row" >
+                <div ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
                     <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
                 </div>
-                <div flex="shrink" layout="column"  layout-align="center center">
+                <div flex="shrink" layout="column"  layout-align="center center" ng-show="ul.selected.title">
                     <div flex layout="column" layout-align="center center">
-                        <h3>{{ul.selected.title}}</h3><h3>by {{ul.selected.author}}</h3>
+                        <h3>{{ul.selected.title}} by {{ul.selected.author}}</h3>
                     </div>
                     <div flex layout="row" layout-align="space-around center">
                         <div layout="column" layout-align="center center ">
@@ -178,12 +181,12 @@
                         <div>Amazon Reviews: {{ul.selected.reviews}}</div>
                         <div> {{ul.selected.pages}} Pages</div>
                     </div>
-                    <div flex layout="row" layout-align="center center">
-                        <h3 flex="20"> Suggested By: </h3>
-                        <md-list flex="80" class="FamousList" layout="row">
-                            <md-list-item class="famousItem" ng-repeat="person in ul.users">
-                                <md-tooltip>{{ ul.selected.image}}</md-tooltip>
-                                <img class="famousPerson" src="./assets/jpg/{{ul.selected.image}}.jpg">
+                    <div flex layout="row" layout-align="space-around center">
+                        <h3> Suggested By {{ul.selected.suggested.length}} : </h3>
+                        <md-list class="FamousList" layout="row">
+                            <md-list-item class="famousItem" ng-repeat="person in ul.selected.suggested">
+                                <md-tooltip>{{person}}</md-tooltip>
+                                <img class="famousPerson" src="./assets/jpg/famous/{{person}}.jpg">
                             </md-list-item>
                         </md-list>
                     </div>
@@ -217,9 +220,9 @@
                                   <!--</md-list-item>-->
                               <!--</md-list>-->
                               <md-list>
-                                  <md-list-item class="booklist" ng-repeat="book in ul.books | filter : {phase: it.phase}">
+                                  <md-list-item  ng-repeat="book in ul.books | filter : {phase: it.phase}">
                                       <!--<md-button ng-click="ul.selectBook(book)" >-->
-                                          <div flex layout="row">
+                                          <div flex layout="row" layout-align="space-around center" class="booklist" >
                                               <div  flex="10" layout="column" layout-align="center center ">
                                                   <a ng-click="ul.upvote(book._id)"><ng-md-icon icon="arrow_drop_up"></ng-md-icon></a>
                                                   {{book.score}}
@@ -231,7 +234,7 @@
                                                   <!--<div class="resize" style='background-image: ./assets/jpg/{{book.image}}.jpg'></div>-->
                                               </div>
                                               <h3 class="booktitle" ng-click="ul.selectBook(book)" flex="50">{{book.title}} by {{book.author}}</h3>
-                                              <div flex="10" layout="column" layout-align="center center">
+                                              <div layout="column" layout-align="center center">
                                                   <md-button class="md-warn md-raised" ng-click="ul.deletebook(book._id)">Delete</md-button>
                                               </div>
                                           </div>
