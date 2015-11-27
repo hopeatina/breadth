@@ -21,7 +21,7 @@ var mongoose = require('mongoose'),
         image: String,
         phase: Number,
         id: ObjectId,
-        suggested: Number,
+        suggested: [String],
         readby: String,
         year: Number,
         score: { type: Number, default: 0 }
