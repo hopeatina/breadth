@@ -5,20 +5,19 @@ var mongoose = require('mongoose');                     // mongoose for mongodb
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var routes = require('./Routes');
 var books = require('./app/src/users/bookModel');
 var passport = require('passport');
 var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
-var uriUtil = require('mongodb-uri');
 
 app.set('port', process.env.PORT || 8080);
 var port = app.get('port');
+
 // configuration =================
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
     replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
-//mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
 
+//mongoose.connect('mongodb://localhost/test'); // connect to mongoDB database local
 
 var uri = "mongodb://heroku_34df02xl:bnpjamshf4oiht806bqn3p8don@ds053764.mongolab.com:53764/heroku_34df02xl";
 

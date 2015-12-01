@@ -106,14 +106,14 @@
 
       function  streams() {
 
-        var streams =[{title: "Home", href:"/views/home"},
-        {title: "Streams", href:"/views/streams"},
+        var streams =[{title: "Home", href:"home"},
+        {title: "Startups", href:"startups"},
         //{title: "Startups"},
         //{title:"Leadership"},
         //{title:"Healthcare"},
         //{title:"Energy"},
         //{title:"Parenting"},
-        {title:"Contact", href:"/views/home"}];
+        {title:"Contact", href:"contact"}];
         return streams;
 
       }

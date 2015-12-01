@@ -2,7 +2,7 @@
 <html lang="en" >
   <head>
     <title>Breadth</title>
-
+      <!--title<base href="/">-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -131,16 +131,17 @@
   <body ng-app="starterApp" layout="column" ng-controller="UserController as ul" ng-cloak >
 
   <div  layout="column" role="main">
+
       <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
           <md-toolbar class="md-theme-light">
-              <div class="md-toolbar-tools">
-                  <h2><span>Breadth</span></h2>
+              <div layout="row" class="md-toolbar-tools" layout-align="center center">
+                  <h2>Breadth</h2>
               </div>
           </md-toolbar>
           <md-content layout-padding>
               <md-list>
                   <md-list-item ng-repeat="stream in ul.streams">
-                   <md-button><h1>{{stream.title}}</h1></md-button>
+                   <md-button ng-href="/#/{{stream.href}}" ><h1>{{stream.title}}</h1></md-button>
                   </md-list-item>
               </md-list>
               <md-button ng-click="ul.toggleList()" class="md-primary" aria-label="Clear Sidebar">
@@ -148,104 +149,23 @@
               </md-button>
           </md-content>
       </md-sidenav>
-      <div layout="column" class="relative" layout-fill role="main">
-          <md-button class="md-fab md-fab-bottom-right md-accent md-button" aria-label="Add" ng-click="ul.showAdd($event)" >
-              <ng-md-icon icon="add" ></ng-md-icon>
-          </md-button>
-        <md-toolbar layout="row" class="md-whiteframe-z1" style="background-color: #000088">
-          <md-button class="menu" ng-click="ul.toggleList()" aria-label="Show User List">
-            <md-icon md-svg-icon="menu" ></md-icon>
-          </md-button>
-          <h1>Breadth</h1>
-          <div flex="15" layout="row" layout-align="center center" > Login with <a href="/auth/twitter" >  <ng-md-icon icon="twitter" style="fill: white" size="32"></ng-md-icon> </a></div>
-        </md-toolbar>
-    </div>
 
-    <md-content style="background-color: lightseagreen" class="md-padding">
-        <md-card id="topcard" flex-offset="20" flex="60"  >
-            <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
-            <div layout="row" >
-                <div ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
-                    <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
-                </div>
-                <div flex="shrink" layout="column"  layout-align="center center" ng-show="ul.selected.title">
-                    <div flex layout="column" layout-align="center center">
-                        <h3>{{ul.selected.title}} by {{ul.selected.author}}</h3>
-                    </div>
-                    <div flex layout="row" layout-align="space-around center">
-                        <div layout="column" layout-align="center center ">
-                            <a ng-click="ul.upvote(ul.selected._id)"><ng-md-icon icon="arrow_drop_up"></ng-md-icon></a>
-                            {{ul.selected.score}}
-                            <a ng-click="ul.downvote(ul.selected._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
-                        </div>
-                        <div>Amazon Reviews: {{ul.selected.reviews}}</div>
-                        <div> {{ul.selected.pages}} Pages</div>
-                    </div>
-                    <div flex layout="row" layout-align="space-around center">
-                        <h3> Suggested By {{ul.selected.suggested.length}} : </h3>
-                        <md-list class="FamousList" layout="row">
-                            <md-list-item class="famousItem" ng-repeat="person in ul.selected.suggested">
-                                <md-tooltip>{{person}}</md-tooltip>
-                                <img class="famousPerson" src="./assets/jpg/famous/{{person}}.jpg">
-                            </md-list-item>
-                        </md-list>
-                    </div>
-                    <!-- FOR CONTACT/MORE PUP UP DIALOG ng-click="ul.showContactOptions($event)"-->
-                    <md-button flex class="md-raised md-warn" md-no-ink ng-click="redirectToAmazon(ul.selected.link)" aria-label="Contact User">
-                        <md-tooltip>{{ ul.selected.title }}</md-tooltip>
-                        <!--<md-icon md-svg-icon="share"></md-icon>-->
-                        MORE
-                    </md-button>
-                </div>
+        <md-toolbar layout="row" class="md-theme-light">
+            <div layout="row" class="md-toolbar-tools" layout-align="space-between center">
+              <md-button class="menu" ng-click="ul.toggleList()" aria-label="Show User List">
+                <md-icon md-svg-icon="menu" ></md-icon>
+              </md-button>
+              <h1>Breadth</h1>
+              <div layout="row" layout-align="end" >
+                  Login with
+                  <a href="/auth/twitter" >
+                      <ng-md-icon icon="twitter" style="fill: white" size="32"></ng-md-icon>
+                  </a>
+              </div>
             </div>
-        </md-card>
-    </md-content>
+        </md-toolbar>
 
-      <md-tabs md-selected="selectedIndex" class="md-accent"
-               md-dynamic-height md-swipe-content md-stretch-tabs="auto" md-center-tabs>
-              <md-tab ng-repeat="it in ul.users" label="{{it.name}}" >
-                      <div id="container" class="md-padding" style="background-color: khaki" >
-                          <md-card flex-offset="20" flex="60" >
-                              <!--<md-list>-->
-                                  <!--<md-list-item ng-repeat="book in it.books">-->
-                                      <!--<md-button ng-click="ul.selectUser(it)" layout-wrap-->
-                                                 <!--ng-class="{'selected' : it === ul.selected }">-->
-                                          <!--<div layout="row" layout-wrap>-->
-                                          <!--<div flex ="30">-->
-                                              <!--<md-icon flex md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>-->
-                                          <!--</div>-->
-                                          <!--<p flex ="69">{{book.title}} <br>{{book.description}}</p>-->
-                                          <!--</div>-->
-                                      <!--</md-button>-->
-                                  <!--</md-list-item>-->
-                              <!--</md-list>-->
-                              <md-list>
-                                  <md-list-item  ng-repeat="book in ul.books | filter : {phase: it.phase}">
-                                      <!--<md-button ng-click="ul.selectBook(book)" >-->
-                                          <div flex layout="row" layout-align="space-around center" class="booklist" >
-                                              <div  flex="10" layout="column" layout-align="center center ">
-                                                  <a ng-click="ul.upvote(book._id)"><ng-md-icon icon="arrow_drop_up"></ng-md-icon></a>
-                                                  {{book.score}}
-                                                  <a ng-click="ul.downvote(book._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
-                                              </div>
-                                              <div  ng-click="ul.selectBook(book)">
-                                                  <!--<md-icon md-svg-icon="share" class="avatar"></md-icon>-->
-                                                  <img class="resize" src="./assets/jpg/{{book.image}}.jpg">
-                                                  <!--<div class="resize" style='background-image: ./assets/jpg/{{book.image}}.jpg'></div>-->
-                                              </div>
-                                              <h3 class="booktitle" ng-click="ul.selectBook(book)" flex="50">{{book.title}} by {{book.author}}</h3>
-                                              <div layout="column" layout-align="center center">
-                                                  <md-button class="md-warn md-raised" ng-click="ul.deletebook(book._id)">Delete</md-button>
-                                              </div>
-                                          </div>
-
-                                      <!--</md-button>-->
-                                  </md-list-item>
-                              </md-list>
-                          </md-card>
-                      </div>
-              </md-tab>
-      </md-tabs>
+      <div ng-view class="relative view-animate" md-padding layout="column" layout-fill role="main" ></div>
 
   </div>
 
@@ -257,6 +177,7 @@
 
   <script src="./src/users/Users.js"></script>
   <script src="src/users/BookController.js"></script>
+  <script src="src/users/HomeController.js"></script>
   <script src="src/users/CategoriesService.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
   <script type="text/javascript">
@@ -264,7 +185,6 @@
           angular
               .module('starterApp', ['ngMaterial', 'users','ngMdIcons','ngRoute'])
               .config(function($mdThemingProvider, $mdIconProvider){
-
                   $mdIconProvider
                       .defaultIconSet("./assets/svg/avatars.svg", 128)
                       .icon("menu"       , "./assets/svg/menu.svg"        , 24)
@@ -273,31 +193,45 @@
                       .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
                       .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
                       .icon("phone"      , "./assets/svg/phone.svg"       , 512)
-                      .icon("add"      , "./assets/svg/ic_add_48px.svg"       , 24);
+                      .icon("healthcare"      , "./assets/svg/health.svg"       , 512)
+                      .icon("energy"      , "./assets/svg/energy.svg"       , 512)
+                      .icon("leadership"      , "./assets/svg/leader.svg"       , 512)
+                      .icon("startups"      , "./assets/svg/startups.svg"       , 512);
 
                       $mdThemingProvider.theme('default')
-                          .primaryPalette('brown')
-                          .accentPalette('red');
+                          .primaryPalette('indigo', {
+                                  'default': '500',
+                                  'hue-1': '100',
+                                  'hue-2': '300'// use shade 200 for default, and keep all other shades the same
+                              })
+                          .accentPalette('green', {
+                                  'default': '500'// use shade 200 for default, and keep all other shades the same
+                              });
 
               })
-              .config(function($routeProvider) {
+              .config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider) {
                       $routeProvider.
 
-                              when('/addStudent', {
-                                  templateUrl: 'addStudent.html', controller: 'AddStudentController'
+                              when('/', {
+                                  templateUrl: 'home.html', controller: 'HomeController'
                               }).
 
-                              when('/viewStudents', {
-                                  templateUrl: 'viewStudents.html', controller: 'ViewStudentsController'
+                              when('/contact', {
+                                  templateUrl: 'contact.html', controller: 'UserController'
+                              }).
+                              when('/startups', {
+                                  templateUrl: 'startupstream.html', controller: 'UserController'
                               }).
 
                               otherwise({
-                                  redirectTo: '/addStudent'
+                                  redirectTo: '/'
                               });
+//                      $locationProvider.html5Mode(true);
 
-                  });
+                  }]);
 
     </script>
 
+  <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </body>
 </html>

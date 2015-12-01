@@ -66,7 +66,6 @@ module.exports = function(app) {
     });
 
     // facebook routes
-
     // =====================================
     // TWITTER ROUTES ======================
     // =====================================
@@ -79,8 +78,8 @@ module.exports = function(app) {
             successRedirect : '/',
             failureRedirect : '/auth/twitter'
         }));
-
 };
+
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
