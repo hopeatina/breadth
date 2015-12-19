@@ -15,7 +15,6 @@
    * @constructor
    */
 
-
     function UserController( catService, $mdSidenav, $mdBottomSheet, $log, $q,$mdDialog,$scope,$http,$window) {
     var self = this;
 
@@ -31,7 +30,6 @@
     self.showAdd      = showAdd;
     self.upvote       = upvote;
     self.downvote     = downvote;
-
 
   var strVar="";
   strVar += "<md-dialog aria-label=\"book Form\">";
