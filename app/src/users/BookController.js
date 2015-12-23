@@ -69,13 +69,25 @@
 
       $scope.redirectToAmazon = function redirectToAmazon(link) {
           $window.open(link, '_blank');
-          console.log(link);
+          //console.log(link);
       };
+
+      $scope.isLoggedIn = isLoggedIn;
+      function isLoggedIn(req, res, next) {
+
+          // if user is authenticated in the session, carry on
+          if (req.isAuthenticated())
+              return next();
+
+          // if they aren't redirect them to the home page
+          res.redirect('/');
+          //console.log("Bruh you're not logged in!");
+      }
 
       function upvote(id) {
          // console.log('Upvoted :  ' + id);
           $http.post('/api/books/upvote'+id).then(function (res) {
-              console.log('Upvoted :  ' + id + res);
+              //console.log('Upvoted :  ' + id + res);
               refresh();
           });
       }
@@ -83,7 +95,7 @@
       function downvote(id) {
           //console.log('Downvoted :  ' + id);
           $http.post('/api/books/downvote'+id).then(function (res) {
-              console.log('Downvoted :  ' + id + " " + res.data);
+              //console.log('Downvoted :  ' + id + " " + res.data);
               refresh();
           });
       }
@@ -99,7 +111,7 @@
               }, function() {
                   $scope.alert = 'You cancelled the dialog.';
               });
-          console.log('Button clicked');
+          //console.log('Button clicked');
       }
 
       function  streams() {
@@ -122,7 +134,7 @@
       }
       function deletebook(id) {
           $http.delete('/api/books/'+id).then(function () {
-              console.log('Deleted :  ' + id);
+              //console.log('Deleted :  ' + id);
               refresh();
           });
       }

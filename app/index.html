@@ -144,7 +144,7 @@
           <md-content layout-padding>
               <md-list>
                   <md-list-item ng-repeat="stream in ul.streams">
-                   <md-button ng-href="/#/{{stream.href}}" ><h1>{{stream.title}}</h1></md-button>
+                   <md-button ng-href="/#/{{stream.href}}" aria-label="Toolbar title" ><h1>{{stream.title}}</h1></md-button>
                   </md-list-item>
               </md-list>
               <md-button ng-click="ul.toggleList()" class="md-primary" aria-label="Clear Sidebar">
@@ -234,6 +234,5 @@
 
     </script>
 
-  <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </body>
 </html>

@@ -1,9 +1,9 @@
-<md-content>
+<md-content class="no-scroll">
     <!--style="background-color: darkgrey" style="background-color:#40C4FF;" /* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
-    <div id="container" class="md-padding">
-    <md-card id="topcard" flex-offset="20" flex="60"  >
+    <div class="md-padding container">
+    <md-card id="topcard" flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="0" flex-offset-sm="3" flex-sm="95" flex-md="95">
         <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
-        <div layout="row" >
+        <div ng-if="ul.selected._id != undefined" layout="row" >
             <div ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
                 <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
             </div>
@@ -12,16 +12,16 @@
                     <h3>{{ul.selected.title}} by {{ul.selected.author}}</h3>
                 </div>
                 <div flex layout="row" layout-align="space-around center">
-                    <div layout="column" layout-align="center center ">
+                    <div flex layout="column" layout-align="center center ">
                         <a ng-click="ul.upvote(ul.selected._id)"><ng-md-icon icon="arrow_drop_up"></ng-md-icon></a>
                         {{ul.selected.score}}
                         <a ng-click="ul.downvote(ul.selected._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
                     </div>
-                    <div>Amazon Reviews: {{ul.selected.reviews}}</div>
-                    <div> {{ul.selected.pages}} Pages</div>
+                    <!--<div>Amazon Reviews: {{ul.selected.reviews}}</div>-->
+                    <div flex layout-align="space-around center" layout="row"> <div flex >{{ul.selected.pages}} </div> <div flex> Pages</div> </div>
                 </div>
                 <div flex layout="row" layout-align="space-around center">
-                    <h3> Suggested By {{ul.selected.suggested.length}} : </h3>
+                    <h3 layout-align="center space-around"> Suggested By {{ul.selected.suggested.length}} : </h3>
                     <md-list class="FamousList" layout="row">
                         <md-list-item class="famousItem" ng-repeat="person in ul.selected.suggested">
                             <md-tooltip>{{person}}</md-tooltip>
@@ -33,19 +33,20 @@
                 <md-button flex class="md-raised md-warn" md-no-ink ng-click="redirectToAmazon(ul.selected.link)" aria-label="Contact User">
                     <md-tooltip>{{ ul.selected.title }}</md-tooltip>
                     <!--<md-icon md-svg-icon="share"></md-icon>-->
-                    MORE
+                    READ
                 </md-button>
             </div>
         </div>
+        <div ng-if="ul.selected._id == undefined" layout="row"></div>
     </md-card>
     </div>
 </md-content>
 
 <md-tabs md-selected="selectedIndex" class="md-shadow-animated md-accent" md-dynamic-height md-swipe-content md-stretch-tabs="auto" md-center-tabs>
-    <md-tab ng-repeat="it in ul.users" label="{{it.name}}" >
-        <div id="container" class="md-padding"  >
+    <md-tab ng-repeat="it in ul.users" label="{{it.name}}" md-on-select="ul.selected= [];">
+        <div class=" container md-padding"  >
             <!--/* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
-            <md-card flex-offset="20" flex="60" >
+            <md-card flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="0" flex-offset-sm="3" flex-sm="95" flex-md="95">
                 <md-list>
                     <md-list-item  ng-repeat="book in ul.books | filter : {phase: it.phase}">
                         <!--<md-button ng-click="ul.selectBook(book)" >-->

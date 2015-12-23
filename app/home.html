@@ -1,9 +1,14 @@
 <div layout="column">
-    <div layout="column" id="homie" flex layout-align="center center" >
-        <h1>BREADTH</h1>
-        <h2>The best books suggested by successful experts.</h2>
+    <div layout="column" id="homie" layout-align="center center" >
+        <h1 class="titletext">BREADTH</h1>
+        <h2 class="titletext">The best books suggested by successful experts.</h2>
+        <md-button style="height: 50px;"  class="md-raised md-primary" md-no-ink  aria-label="Go Check it out">
+            <md-tooltip>Take a peek</md-tooltip>
+            <!--<md-icon md-svg-icon="share"></md-icon>-->
+            <span class="titletext">Go</span>
+        </md-button>
     </div>
-    <div flex ng-controller="HomeController as HC" ng-cloak class="md-padding">
+    <div ng-controller="HomeController as HC" ng-cloak class="md-padding">
         <div flex-offset-gt-md="10" flex-gt-md="80">
         <md-grid-list md-cols-sm="2" md-cols-md="4" md-cols-gt-md="8" md-row-height="1:1" md-gutter-gt-md="20px" md-gutter-gt-sm="4px" >
             <md-grid-tile ng-repeat="tile in HC.streams"
@@ -11,10 +16,10 @@
                           md-colspan="2"
                           md-colspan-sm="1"
                           ng-class="tile.color">
-                <md-button ng-href="/#/{{tile.href}}" >
+                <md-button ng-href="/#/{{tile.href}}" aria-label="startups button link" >
                 <md-icon class="icon" md-svg-icon="{{tile.icon}}"></md-icon>
                 </md-button>
-                <md-grid-tile-footer><h3>{{tile.title}}</h3></md-grid-tile-footer>
+                <md-grid-tile-footer><h3 class="icontext">{{tile.title}}</h3></md-grid-tile-footer>
             </md-grid-tile>
         </md-grid-list>
         </div>
