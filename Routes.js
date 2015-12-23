@@ -84,10 +84,13 @@ module.exports = function(app) {
 function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
+    if (req.isAuthenticated()) {
+        console.log("YOU ARE ALREADY LOGGED IN BRUH");
 
+        return next();
+    }
+    console.log("Bruh you're not logged in!");
     // if they aren't redirect them to the home page
     res.redirect('/');
-    console.log("Bruh you're not logged in!");
+
 }

@@ -18,10 +18,10 @@
                         <a ng-click="ul.downvote(ul.selected._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
                     </div>
                     <!--<div>Amazon Reviews: {{ul.selected.reviews}}</div>-->
-                    <div flex layout-align="space-around center" layout="row"> <div flex >{{ul.selected.pages}} </div> <div flex> Pages</div> </div>
+                    <p fle="grow" layout-align="center space-around "> {{ul.selected.pages}}  Pages</p>
                 </div>
+                <p flex layout-align="center space-around"> Suggested By {{ul.selected.suggested.length}} </p>
                 <div flex layout="row" layout-align="space-around center">
-                    <h3 layout-align="center space-around"> Suggested By {{ul.selected.suggested.length}} : </h3>
                     <md-list class="FamousList" layout="row">
                         <md-list-item class="famousItem" ng-repeat="person in ul.selected.suggested">
                             <md-tooltip>{{person}}</md-tooltip>
