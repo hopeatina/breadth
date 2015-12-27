@@ -164,7 +164,7 @@
           <md-content layout-padding>
               <md-list>
                   <md-list-item ng-repeat="stream in ul.streams">
-                   <md-button ng-href="/#/{{stream.href}}" aria-label="Toolbar title" ><h1>{{stream.title}}</h1></md-button>
+                   <md-button ng-click="ul.toggleList()" ng-href="/#/{{stream.href}}" aria-label="Toolbar title" ><h1>{{stream.title}}</h1></md-button>
                   </md-list-item>
               </md-list>
               <md-button ng-click="ul.toggleList()" class="md-primary" aria-label="Clear Sidebar">
