@@ -29,6 +29,12 @@ html, body {
   text-align:center;
 }
 
+.titletext {
+  font-size: xx-large;
+  color: black;
+  text-align:center;
+}
+
 md-toolbar h1 {
   margin: auto;
 }

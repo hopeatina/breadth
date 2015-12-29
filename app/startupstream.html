@@ -1,8 +1,10 @@
 <md-content class="no-scroll">
     <!--style="background-color: darkgrey" style="background-color:#40C4FF;" /* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
     <div class="md-padding container">
+
     <md-card id="topcard" flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="0" flex-offset-sm="3" flex-sm="95" flex-md="95">
         <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
+        <div ng-if="ul.selected._id == undefined" layout="row" layout-align="center center"><h1 class="categorytext">{{ul.users[selectedIndex].name}}</h1></div>
         <div ng-if="ul.selected._id != undefined" layout="row" >
             <div ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
                 <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
