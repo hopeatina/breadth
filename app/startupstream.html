@@ -6,7 +6,7 @@
         <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
         <div ng-if="ul.selected._id == undefined" layout="row" layout-align="center center"><h1 class="categorytext">{{ul.users[selectedIndex].name}}</h1></div>
         <div ng-if="ul.selected._id != undefined" layout="row" >
-            <div ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
+            <div flex="initial" ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
                 <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
             </div>
             <div flex="shrink" layout="column"  layout-align="center center" ng-show="ul.selected.title">
