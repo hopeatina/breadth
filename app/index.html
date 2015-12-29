@@ -218,12 +218,7 @@
         </md-toolbar>
 
       <div ng-view class="relative view-animate" md-padding layout="column" layout-fill role="main" ></div>
-      <div id="slideout">
-      <img src="feedback.png" alt="Feedback" />
-      <div id="slideout_inner">
-          [form code goes here]
-      </div>
-  </div>
+
 
   </div>
 
@@ -288,6 +283,16 @@
                   }]);
 
     </script>
-
+  <script type="text/javascript">
+      (function() {
+          var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = '//api.usersnap.com/load/'+
+                  '79604c17-27cf-42ae-b9d6-cfc65d25cca8.js';
+          var x = document.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+      })();
+  </script>
   </body>
 </html>
