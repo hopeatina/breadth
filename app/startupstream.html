@@ -2,7 +2,7 @@
     <!--style="background-color: darkgrey" style="background-color:#40C4FF;" /* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
     <div class="md-padding container">
 
-    <md-card id="topcard" flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="0" flex-offset-sm="5" flex-sm="90" flex-md="95">
+    <md-card id="topcard" flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="5" flex-offset-sm="5" flex-sm="90" flex-md="90">
         <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
         <div ng-if="ul.selected._id == undefined" layout="row" layout-align="center center"><h1 class="categorytext">{{ul.users[selectedIndex].name}}</h1></div>
         <div ng-if="ul.selected._id != undefined" layout="row" >
@@ -51,7 +51,7 @@
     <md-tab ng-repeat="it in ul.users" label="{{it.name}}" md-on-select="ul.selected= [];">
         <div class=" container md-padding"  >
             <!--/* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
-            <md-card flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="0" flex-offset-sm="5" flex-sm="90" flex-md="95">
+            <md-card flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="5" flex-offset-sm="5" flex-sm="90" flex-md="90">
                 <div layout="row" layout-align="center center" md-padding>Click on each book for more information</div>
                 <md-list>
                     <md-list-item  ng-repeat="book in ul.books | filter : {phase: it.phase}">
