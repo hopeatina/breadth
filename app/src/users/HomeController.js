@@ -14,9 +14,9 @@
 
         self.streams = [
         {title: "Startups", color: "green", icon: "startups", href: "startups"},
-        {title: "Leadership", color: "indigo", icon: "leadership", href: "startups"},
-        {title: "Healthcare", color: "red", icon: "healthcare", href: "startups"},
-        {title: "Energy", color: "brown", icon: "energy", href: "startups"}
+        {title: "Leadership ...", color: "indigo", icon: "leadership", href: "startups"},
+        {title: "Healthcare ...", color: "red", icon: "healthcare", href: "startups"},
+        {title: "Energy ...", color: "brown", icon: "energy", href: "startups"}
         ];
     }
 

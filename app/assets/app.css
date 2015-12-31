@@ -27,6 +27,7 @@ html, body {
   font-size: xx-large;
   color: white;
   text-align:center;
+  background-color:rgba(255,255,255,0.1);
 }
 
 .categorytext {
@@ -187,6 +188,9 @@ md-grid-tile {
 #homie {
   height: 500px;
   background: linear-gradient(15deg,#4CAF50,#3F51B5 ); /* For Safari 5.1 to 6.0 */
+  /*background-color: #4CAF50;*/
+  /*background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nODUnIGhlaWdodD0nNzUnPgoJPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0nIzRDQUY1MCcvPgoJPGVsbGlwc2UgY3g9JzUwJScgY3k9JzAlJyByeD0nNTAlJyByeT0nNTAlJyBmaWxsLW9wYWNpdHk9JzAuNTEnIGZpbGw9JyMzRjUxQjUnLz4KCTxlbGxpcHNlIGN4PScwJScgY3k9JzEwMCUnIHJ4PSc1MCUnIHJ5PSc1MCUnIGZpbGwtb3BhY2l0eT0nMC41MScgZmlsbD0nIzNGNTFCNScvPgoJPGVsbGlwc2UgY3g9JzEwMCUnIGN5PScxMDAlJyByeD0nNTAlJyByeT0nNTAlJyBmaWxsLW9wYWNpdHk9JzAuNTEnIGZpbGw9JyMzRjUxQjUnLz4KPC9zdmc+);*/
+
 }
 
 .hometext {

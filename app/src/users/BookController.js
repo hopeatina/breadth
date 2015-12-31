@@ -67,6 +67,13 @@
   strVar += "    <\/md-dialog-actions>";
   strVar += "<\/md-dialog>";
 
+      $scope.$watch(function(){
+          return window.innerWidth;
+      }, function(value) {
+          if (value > 768) {$scope.watchwidth = true;} else {$scope.watchwidth = false;}
+
+      });
+
       $scope.redirectToAmazon = function redirectToAmazon(link) {
           $window.open(link, '_blank');
           //console.log(link);
