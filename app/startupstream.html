@@ -1,4 +1,4 @@
-<md-content class="no-scroll">
+<div class="no-scroll">
     <!--style="background-color: darkgrey" style="background-color:#40C4FF;" /* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
     <div class="md-padding container">
 
@@ -45,7 +45,7 @@
         <div ng-if="ul.selected._id == undefined" layout="row"></div>
     </md-card>
     </div>
-</md-content>
+</div>
 
 <md-tabs md-selected="selectedIndex" class="md-shadow-animated md-accent" md-dynamic-height md-swipe-content md-stretch-tabs="auto" md-center-tabs>
     <md-tab ng-repeat="it in ul.users" label="{{it.name}}" md-on-select="ul.selected= [];">
