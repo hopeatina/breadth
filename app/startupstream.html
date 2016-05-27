@@ -62,13 +62,14 @@
                                 {{book.score}}
                                 <a ng-click="ul.downvote(book._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
                             </div>
-                            <div  ng-click="ul.selectBook(book)">
+                            <div flex="20" ng-click="ul.selectBook(book)">
                                 <!--<md-icon md-svg-icon="share" class="avatar"></md-icon>-->
                                 <img class="resize" src="./assets/jpg/{{book.image}}.jpg">
                                 <!--<div class="resize" style='background-image: ./assets/jpg/{{book.image}}.jpg'></div>-->
                             </div>
-                            <h3 class="booktitle" ng-click="ul.selectBook(book)" flex="50">{{book.title}} by {{book.author}}</h3>
-                            <div layout="column" layout-align="center center">
+                            <div flex layout="column" layout-align="center">
+
+                                <h3 class="booktitle" ng-click="ul.selectBook(book)" flex="50">{{book.title}} by {{book.author}}</h3>
                                 <!--<md-button class="md-warn md-raised" ng-click="ul.deletebook(book._id)">Delete</md-button>-->
                             </div>
                         </div>
