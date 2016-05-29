@@ -71,7 +71,7 @@
           return window.innerWidth;
       }, function(value) {
           if (value > 768) {$scope.watchwidth = true;} else {$scope.watchwidth = false;}
-
+          console.log($scope.watchwidth);
       });
 
       $scope.redirectToAmazon = function redirectToAmazon(link) {
@@ -137,6 +137,8 @@
 
       function selectBook(book) {
           self.selected = book;
+          console.log($scope.watchwidth);
+
 
       }
       function deletebook(id) {

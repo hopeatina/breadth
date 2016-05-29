@@ -1,16 +1,16 @@
-<div class="no-scroll">
+<div class="streambackground">
     <!--style="background-color: darkgrey" style="background-color:#40C4FF;" /* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
-    <div class="md-padding container">
+    <div class="container">
 
     <md-card id="topcard" flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="5" flex-offset-sm="5" flex-sm="90" flex-md="90">
         <!--<md-icon href="{{ul.selected.link}}" md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
         <div ng-if="ul.selected._id == undefined" layout="row" layout-align="center center"><h1 class="categorytext">{{ul.users[selectedIndex].name}}</h1></div>
         <div ng-if="ul.selected._id != undefined" layout="row" >
-            <div ng-show="watchwidth" flex="initial" ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
+            <div ng-if="watchwidth" flex="initial" ng-click="redirectToAmazon(ul.selected.link)" layout="column" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
                 <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
             </div>
             <div flex="shrink" layout="column"  layout-align="center center" ng-show="ul.selected.title">
-                <div ng-hide="watchwidth" flex="initial" ng-click="redirectToAmazon(ul.selected.link)" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
+                <div ng-if="!watchwidth" flex="initial" ng-click="redirectToAmazon(ul.selected.link)" layout-padding layout-margin layout-align="center" ng-show="ul.selected.title" >
                     <img class="resize1" src="./assets/jpg/{{ul.selected.image}}.jpg">
                 </div>
                 <div layout="row" layout-align="center space-around">
@@ -23,7 +23,7 @@
                         <a ng-click="ul.downvote(ul.selected._id)"><ng-md-icon icon="arrow_drop_down"></ng-md-icon></a>
                     </div>
                     <!--<div>Amazon Reviews: {{ul.selected.reviews}}</div>-->
-                    <p flex="grow" layout-align="center space-around "> {{ul.selected.pages}}  Pages</p>
+                    <div layout="column" layout-align="center"> {{ul.selected.pages}}  Pages</div>
                 </div>
                 <p flex layout-align="center space-around"> Suggested By {{ul.selected.suggested.length}} </p>
                 <div flex layout="row" layout-align="space-around center">
@@ -49,7 +49,7 @@
 
 <md-tabs md-selected="selectedIndex" class="md-shadow-animated md-accent" md-dynamic-height md-swipe-content md-stretch-tabs="auto" md-center-tabs>
     <md-tab ng-repeat="it in ul.users" label="{{it.name}}" md-on-select="ul.selected= [];">
-        <div class=" container md-padding"  >
+        <div class=" container"  >
             <!--/* Standard syntax (must be last) : linear-gradient(gold, gold); */-->
             <md-card flex-offset-gt-md="20" flex-gt-md="60" flex-offset-md="5" flex-offset-sm="5" flex-sm="90" flex-md="90">
                 <div layout="row" layout-align="center center" md-padding>Click on each book for more information</div>

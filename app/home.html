@@ -17,8 +17,8 @@
                                                                                               name="b_710d933e87b09d9b5330fab4c_fe54d826b9"
                                                                                               tabindex="-1" value="">
                     </div>
-                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe"
-                                              id="mc-embedded-subscribe" class="button"></div>
+                    <md-button class="clear"><input type="submit" value="Subscribe" name="subscribe"
+                                              id="mc-embedded-subscribe" class="button"></md-button>
                 </div>
             </form>
         </div>
@@ -33,10 +33,11 @@
         <!--End mc_embed_signup-->
     </div>
     <div layout="column"  ng-controller="HomeController as HC" ng-cloak >
-        <h1> Topics</h1>
+        <div layout="row" layout-align="center"><h1> Topics</h1>
+        </div>
             <md-grid-list flex md-cols-xs="2" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="8" md-row-height="1:1"
                           md-gutter-gt-md="20px" md-gutter-gt-sm="4px">
-                <md-grid-tile ng-repeat="tile in HC.streams"
+                <md-grid-tile ng-href="/#/{{tile.href}}" ng-repeat="tile in HC.streams"
                               md-rowspan="1"
                               md-colspan="2"
                               md-colspan-sm="1"
